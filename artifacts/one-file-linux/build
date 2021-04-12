@@ -1,0 +1,17 @@
+#!/bin/sh
+set -e
+VERSION=`file -L /boot/kernel| sed 's/^.\+ version \([^ ]\+\)\s.\+$/\1/'|sed 's/-gentoo-r[0-9]\+$//'`
+sed -i "s/__VERSION__/$VERSION/g" /boot/grub/grub.cfg
+
+cat << 'EOS' > /tmp/grub.cfg
+set BOOT_PARTITION=$root
+loopback --offset1m loop /efi/boot/bootx64.efi
+set root=loop
+set prefix=($root)/boot/grub
+EOS
+
+rm /usr/bin/install # for /usr/sbin/install
+
+mkdir -p /efi/boot
+grub-mkimage -p /boot/grub -c /tmp/grub.cfg -o /efi/boot/bootx64.efi -O x86_64-efi xfs fat part_gpt part_msdos normal linux echo all_video test multiboot multiboot2 search sleep iso9660 gzio lvm chain configfile cpuid minicmd gfxterm_background png font terminal squash4 loopback videoinfo videotest blocklist probe efi_gop efi_uga
+

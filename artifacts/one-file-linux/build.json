@@ -1,0 +1,4 @@
+{
+	"packages":["kmod","dosfstools","parted","grub","kbd","lvm2","lsscsi","pciutils","usbutils","btrfs-progs","xfsprogs","exfat-utils","screen","beep","lshw","hostapd","wireless-regdb","wireless-tools","wpa_supplicant","iw"],
+	"files":["/usr/bin/iperf3","/usr/sbin/rfkill"]
+}

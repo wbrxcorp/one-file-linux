@@ -1,0 +1,3 @@
+#!/bin/sh
+sed -i 's/-i%I$/-i%I -Dnl80211,wext/' /lib/systemd/system/wpa_supplicant\@.service
+

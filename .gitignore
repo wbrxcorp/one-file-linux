@@ -1,0 +1,4 @@
+work
+*.squashfs
+bootx64.efi
+
